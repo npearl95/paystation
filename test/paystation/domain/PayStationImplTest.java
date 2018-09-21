@@ -211,7 +211,7 @@ public class PayStationImplTest {
     }
     /*
     Case 6:
-    Call tto cencel returns a map that doesn not contain a key for coin not entered
+    Call to cencel returns a map that doesn not contain a key for coin not entered
     */
     @Test
     public void case6() throws IllegalCoinException{
@@ -236,7 +236,7 @@ public class PayStationImplTest {
         ps.addPayment(10);
         ps.addPayment(25);
         ps.cancel();
-        assertEquals(expectedMap,ps.cancel());   
+        assertEquals(expectedMap,ps.printCurrentMap());   
     }
     /*
     Case 8:
@@ -249,35 +249,4 @@ public class PayStationImplTest {
         ps.buy();
         assertEquals(expectedMap,ps.printCurrentMap());   
     }
-    /*public void coinReturn()throws IllegalCoinException{
-        Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
-        ps.addPayment(10);
-        myMap.putIfAbsent(10, 1);
-        //myMap.putIfAbsent(25, 2);
-        assertEquals(myMap,ps.cancel());
-        //myMap.keySet().iterator().forEachRemaining(System.out::println);
-    }*/
-    /*public void multipleCoinsreturn()throws IllegalCoinException{
-        final Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>(){
-            {       
-                put(10,1);
-                put(25,1);
-            }
-        };
-        ps.addPayment(10);
-        ps.addPayment(25);
-        
-        assertEquals(myMap,ps.cancel());
-    }
-    public void ClearMapAfterBuy()throws IllegalCoinException{
-        final Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>(){
-     
-        };
-        ps.addPayment(10);
-        ps.addPayment(25);
-        
-        assertEquals(myMap,ps.buy());
-        
-    }*/
-    
 }
