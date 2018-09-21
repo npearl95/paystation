@@ -24,12 +24,12 @@ import java.util.Map;
  */
 public class PayStationImpl implements PayStation {
     Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
-    private int insertedSoFar;
-    private int timeBought;
-    private int totalBought;
-    private int twentyFiveCounter;
-    private int fiveCounter;
-    private int tenCounter;
+    private int insertedSoFar=0;
+    private int timeBought=0;
+    private int totalBought=0;
+    private int twentyFiveCounter=0;
+    private int fiveCounter=0;
+    private int tenCounter=0;
 
     @Override
     public void addPayment(int coinValue)
@@ -37,17 +37,17 @@ public class PayStationImpl implements PayStation {
         switch (coinValue) {
             case 5: {
                 fiveCounter++;
-                myMap.putIfAbsent(5, fiveCounter);
+                myMap.put(5, fiveCounter);
                 break;
             }
             case 10: {
                 tenCounter++;
-                myMap.putIfAbsent(10, tenCounter);
+                myMap.put(10, tenCounter);
                 break;
             }
             case 25: {
                 twentyFiveCounter++;
-                myMap.putIfAbsent(25, twentyFiveCounter);
+                myMap.put(25, twentyFiveCounter);
                 break;
             }
             default:
@@ -92,7 +92,8 @@ public class PayStationImpl implements PayStation {
     }*/
     
     private void reset() {
-        timeBought = insertedSoFar = 0;
+        fiveCounter=twentyFiveCounter=tenCounter= timeBought = insertedSoFar = 0;
+        
     }
     @Override
     public int empty(){

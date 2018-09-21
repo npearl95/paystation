@@ -173,9 +173,40 @@ public class PayStationImplTest {
         ps.buy();
         ps.empty();
         assertEquals(0,ps.empty());
+    }
+    /*
+    Case 4:
+    Call to cancel returns a map containing one coin entered
+    */
+    @Test
+    public void case4() throws IllegalCoinException{
+        final Map<Integer, Integer>  expectedMap= new HashMap<Integer,Integer>(){
+            {       
+                put(10,1);
+            }
+        };
+        ps.addPayment(10);
+        assertEquals(expectedMap,ps.cancel());
         
     }
-    
+    /*
+    Case 5:
+    Call to cancel returns a map containing a mixture of coins entered
+    */
+    @Test
+    public void case5() throws IllegalCoinException{
+        final Map<Integer, Integer>  expectedMap= new HashMap<Integer,Integer>(){
+            {       
+                put(10,1);
+                put(25,2);
+            }
+        };
+        ps.addPayment(10);
+        ps.addPayment(25);
+        ps.addPayment(25);
+        assertEquals(expectedMap,ps.cancel());
+        
+    }
     /*public void coinReturn()throws IllegalCoinException{
         Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
         ps.addPayment(10);
