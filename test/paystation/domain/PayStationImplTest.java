@@ -144,7 +144,7 @@ public class PayStationImplTest {
     /*case 1
     Call to empty returns the total ammount entered */
     @Test
-    public void callEmply() throws IllegalCoinException{
+    public void case1() throws IllegalCoinException{
         ps.addPayment(5);
         ps.addPayment(10);
         ps.buy();
