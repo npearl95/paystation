@@ -1,5 +1,8 @@
 package paystation.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Implementation of the pay station.
  *
@@ -20,17 +23,33 @@ package paystation.domain;
  * purposes. For any commercial use, see http://www.baerbak.com/
  */
 public class PayStationImpl implements PayStation {
-    
+    Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
     private int insertedSoFar;
     private int timeBought;
+    private int totalBought;
+    private int twentyFiveCounter;
+    private int fiveCounter;
+    private int tenCounter;
 
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
         switch (coinValue) {
-            case 5: break;
-            case 10: break;
-            case 25: break;
+            case 5: {
+                fiveCounter++;
+                myMap.putIfAbsent(5, fiveCounter);
+                break;
+            }
+            case 10: {
+                tenCounter++;
+                myMap.putIfAbsent(10, tenCounter);
+                break;
+            }
+            case 25: {
+                twentyFiveCounter++;
+                myMap.putIfAbsent(25, twentyFiveCounter);
+                break;
+            }
             default:
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
@@ -40,22 +59,48 @@ public class PayStationImpl implements PayStation {
 
     @Override
     public int readDisplay() {
-        return timeBought;
+       return timeBought;
+       //return 2;
     }
 
     @Override
     public Receipt buy() {
         Receipt r = new ReceiptImpl(timeBought);
+        totalBought += insertedSoFar;
+        myMap.clear();
         reset();
         return r;
     }
 
+/** Cancel the present transaction. Resets the pay station for a 
+    *new transaction. 
+    * return A Map defining the coins returned to the user. 
+    * The key is the coin type and the associated value is the 
+    * number of these coins that are returned. 
+    * The Map object is never null even if no coins are returned. 
+    * The Map will only contain only keys for coins to be returned. 
+    * The Map will be cleared after a cancel or buy. 
+    */
     @Override
-    public void cancel() {
-        reset();
+    public Map<Integer, Integer> cancel() {
+       Map<Integer, Integer>  map2= new HashMap<Integer,Integer>();
+       map2.putAll(myMap);
+       myMap.clear();
+       return map2;
     }
+    /*public void cancel(){
+        reset();
+    }*/
     
     private void reset() {
         timeBought = insertedSoFar = 0;
     }
+    @Override
+    public int empty(){
+        int temp = totalBought;
+        insertedSoFar =0;
+        reset();
+        return temp;
+    }
+    
 }

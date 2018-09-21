@@ -15,6 +15,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
+import java.util.HashMap;
+import java.util.Map;
 public class PayStationImplTest {
 
     PayStation ps;
@@ -127,7 +129,7 @@ public class PayStationImplTest {
     /**
      * Verify that cancel clears the pay station
      */
-    @Test
+    /*@Test
     public void shouldClearAfterCancel()
             throws IllegalCoinException {
         ps.addPayment(10);
@@ -138,4 +140,53 @@ public class PayStationImplTest {
         assertEquals("Insert after cancel should work",
                 10, ps.readDisplay());
     }
-}
+    */
+    /*New test case 1
+    Call to empty returns the total ammount entered */
+    @Test
+    public void callEmply() throws IllegalCoinException{
+        ps.addPayment(5);
+        ps.addPayment(10);
+        //System.out.println("insertedsofar "+ps.empty());
+    }
+    @Test
+    /*public void coinReturn()throws IllegalCoinException{
+        Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
+        ps.addPayment(10);
+        myMap.putIfAbsent(10, 1);
+        //myMap.putIfAbsent(25, 2);
+        assertEquals(myMap,ps.cancel());
+        //myMap.keySet().iterator().forEachRemaining(System.out::println);
+    }*/
+    public void multipleCoinsreturn()throws IllegalCoinException{
+        /*final Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
+        ps.addPayment(10);
+        ps.addPayment(25);
+        myMap.putIfAbsent(10, 1);
+        myMap.putIfAbsent(25, 1);
+        assertEquals(myMap,ps.cancel());*/
+        final Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>(){
+            {       
+                put(10,1);
+                put(25,1);
+            }
+        };
+        ps.addPayment(10);
+        ps.addPayment(25);
+        
+        assertEquals(myMap,ps.cancel());
+    }
+    public void ClearMapAfterBuy()throws IllegalCoinException{
+        final Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>(){
+        /*    {       
+                put(10,0);
+                put(25,0);
+            }*/
+        };
+        ps.addPayment(10);
+        ps.addPayment(25);
+        
+        assertEquals(myMap,ps.buy());
+        
+    }
+}   
