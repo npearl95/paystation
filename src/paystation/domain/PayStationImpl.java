@@ -102,5 +102,9 @@ public class PayStationImpl implements PayStation {
         reset();
         return temp;
     }
+    @Override
+    public Map<Integer, Integer> printCurrentMap() {
+       return myMap;
+    }
     
 }

@@ -231,10 +231,9 @@ public class PayStationImplTest {
     Call to cancel clears the map
     */
     @Test
-    public void case8() throws IllegalCoinException{
+    public void case7() throws IllegalCoinException{
         final Map<Integer, Integer>  expectedMap= new HashMap<Integer,Integer>(){};
         ps.addPayment(10);
-        ps.buy();
         ps.addPayment(25);
         ps.cancel();
         assertEquals(expectedMap,ps.cancel());   
@@ -243,7 +242,13 @@ public class PayStationImplTest {
     Case 8:
     Call to buy clears the map
     */
-    
+    @Test
+    public void case8() throws IllegalCoinException{
+        final Map<Integer, Integer>  expectedMap= new HashMap<Integer,Integer>(){};
+        ps.addPayment(10);
+        ps.buy();
+        assertEquals(expectedMap,ps.printCurrentMap());   
+    }
     /*public void coinReturn()throws IllegalCoinException{
         Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
         ps.addPayment(10);

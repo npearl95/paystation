@@ -55,4 +55,6 @@ public interface PayStation {
     public Map<Integer, Integer> cancel();
     //public void cancel();
     public int empty();
+    
+    public Map<Integer, Integer> printCurrentMap();
 }
