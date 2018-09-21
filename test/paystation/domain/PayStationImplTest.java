@@ -199,14 +199,51 @@ public class PayStationImplTest {
             {       
                 put(10,1);
                 put(25,2);
+                put(5,1);
             }
         };
         ps.addPayment(10);
         ps.addPayment(25);
         ps.addPayment(25);
+        ps.addPayment(5);
         assertEquals(expectedMap,ps.cancel());
         
     }
+    /*
+    Case 6:
+    Call tto cencel returns a map that doesn not contain a key for coin not entered
+    */
+    @Test
+    public void case6() throws IllegalCoinException{
+        final Map<Integer, Integer>  expectedMap= new HashMap<Integer,Integer>(){
+            {       
+                put(10,1);
+                put(25,1);
+            }
+        };
+        ps.addPayment(10);
+        ps.addPayment(25);
+        assertEquals(expectedMap,ps.cancel());
+        
+    }
+    /*
+    Case 7:
+    Call to cancel clears the map
+    */
+    @Test
+    public void case8() throws IllegalCoinException{
+        final Map<Integer, Integer>  expectedMap= new HashMap<Integer,Integer>(){};
+        ps.addPayment(10);
+        ps.buy();
+        ps.addPayment(25);
+        ps.cancel();
+        assertEquals(expectedMap,ps.cancel());   
+    }
+    /*
+    Case 8:
+    Call to buy clears the map
+    */
+    
     /*public void coinReturn()throws IllegalCoinException{
         Map<Integer, Integer>  myMap= new HashMap<Integer,Integer>();
         ps.addPayment(10);
