@@ -60,7 +60,6 @@ public class PayStationImpl implements PayStation {
     @Override
     public int readDisplay() {
        return timeBought;
-       //return 2;
     }
 
     @Override
@@ -98,7 +97,7 @@ public class PayStationImpl implements PayStation {
     @Override
     public int empty(){
         int temp = totalBought;
-        insertedSoFar =0;
+        totalBought=0;
         reset();
         return temp;
     }
